@@ -6,11 +6,7 @@ const connectionString = process.env.DATABASE_URL || "postgresql://test:test123@
 const config = {
     connectionString
 }
-if(process.env.NODE_ENV = "production"){
-    config.ssl = {
-        rejectUnauthorized: false
-    }
-}
+
 const db = pgp(config)
 
 describe("Testing my shoes services API", () => {
