@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="./index.html">home</a></li>
+            <li><a href="./new.html">add</a></li>
+            <li><a href="./cart.html">cart</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="heading">
+            <h1>Add new shoes</h1>
+        </div>
+        <div class="add-form">
+            <div class="msg"></div>
+            <form>
+                <h2>SHOE DETAILS</h2>
+                <div>
+                    <h4>Brand: </h4><input type="text" class="add-brand" required>
+                </div>
+                <div>
+                    <h4>Color: </h4><input type="text" class="add-color" required>
+                </div>
+                <div>
+                    <h4>Price: </h4><input type="number" class="add-price" required>
+                </div>
+                <div>
+                    <h4>Size: </h4><input type="number" class="add-size" required>
+                </div>
+                <button class="add-button">ADD</button>
+            </form>
+        </div>
+    </div>
+    <script src="./js/shoeCatalogue.js"></script>
+    <script src="./js/shoeCatalogue.dom.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* styling the body */
+body, html {
+    background-color: lightslategray;
+    overflow-x: hidden;
+}
+
+/* adding page navigation */
+.navbar {
+    background-color: black;
+    height: 60px;
+    line-height: 60px;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.navbar > ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar > ul > li > a {
+    padding: 2em;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* hero section */
+.my-form {
+    border: 1px solid black;
+    background-color: #fff;
+    height: max-content;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+/* the filter section and the container */
+.container {
+    background-image: url("../img/hero.png");
+    background-attachment: fixed;
+    object-fit: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.home-page {
+    display: flex;
+}
+
+.heading {
+    background-color: #fff;
+}
+
+.heading > h1 {
+    text-decoration: underline;
+    margin: 1em;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    max-width: max-content;
+}
+
+.filters > div {
+    margin: 0em 2em 2em 2em;
+}
+
+#brand, #color, #size {
+    width: 10em;
+}
+
+.filter-button, .add-button {
+    width: 100%;
+    height: 2em;
+    background-color: gray;
+}
+
+/* the displayed cards */
+.list-shoes {
+    width: max-content;
+    background-color: #fff;
+}
+.list-shoes > div {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    flex-wrap: wrap;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 1em;
+    background-color: lightgray;
+    padding: 1em;
+}
+.card > .image-box {
+    width: 10em;
+    height: 10em;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.add-cart {
+    background-color: #000;
+    margin-top: 3px;
+    height: 2.5em;
+    width: max-content;
+    color: #fff;
+    line-height: 2em;
+    padding: 4px;
+}
+
+/* image box color by class */
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.orange {
+    background-color: orange;
+}
+
+/* mobile view and smaller screens */
+@media screen and (max-width: 688px) {
+    .home-page {
+        flex-direction: column;
+    }
+    .filters {
+        flex-direction: row;
+    }
+    .filters > div {
+        margin: 5px;
+    }
+    .card {
+        width: 82%;
+    }
+    .filters {
+        flex-wrap: wrap;
+    }
+    .list-shoes {
+        width: 400px;
+    }
+    .list-shoes > div {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+    }
+    #brand, #color, #size {
+        width: 5em;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .list-shoes {
+        width: 350px;
+    }
+    .list-shoes > div {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 350px;
+    }
+    #brand, #color, #size {
+        width: 5em;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .list-shoes {
+        width: 300px;
+    }
+    .list-shoes > div {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+    }
+    #brand, #color, #size {
+        width: 5em;
+    }
+}
+
+/* cart */
+table {
+    background-color: #fff;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgb(122, 122, 122);
+    color: white;
+}
+
+th, td {
+    width: 5em;
+    padding: 0.5em;
+}
+
+.no-cart {
+    margin: 2em 0;
+}
+
+.checkout-clear {
+    display: flex;
+}
+
+.checkout-clear > button {
+    width: 100%;
+    background-color: gray;
+}
+
+/* add form */
+.add-form {
+    border: 1px solid black;
+    background-color: #fff;
+    padding: 2em;
+}
+.add-form > form > h2 {
+    margin: 1em;
+}
+
+.add-form > form > button {
+    background-color: gray;
+}
+
+.add-form > form > div {
+    margin: 1em 0;
+}
+
+.add-form > form > div > input {
+    width: 100%;
+    height: 30px;
+}
+
+.card > .details > .card-details {
+    font-size: 1em;
+}
+
+.card > h3 {
+    text-transform: uppercase;
+}

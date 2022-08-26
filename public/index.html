@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoe Catalogue</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="./index.html">home</a></li>
+            <li><a href="./new.html">add</a></li>
+            <li><a href="./cart.html">cart</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="heading">
+            <h1>Shoe Catalogue</h1>
+        </div>
+        <div class="home-page">
+            <div class="my-form">
+                <div class="heading">
+                    <h1>Filter options</h1>
+                </div>
+            <form>
+                <div class="filters">
+                    <div class="color">
+                        <h3>Color</h3>
+                        <select name="color" id="color">
+                            <option value="all">ALL</option>
+                            <option value="red">red</option>
+                            <option value="blue">blue</option>
+                            <option value="orange">orange</option>
+                        </select>
+                    </div>
+                    <div class="brand">
+                        <h3>Brand</h3>
+                        <select name="brand" id="brand">
+                            <option value="all">ALL</option>
+                            <option value="mike">Mike</option>
+                            <option value="hadidas">Hadidas</option>
+                            <option value="huma">Huma</option>
+                        </select>
+                    </div>
+                    <div class="size">
+                        <h3>Size</h3>
+                        <select name="brand" id="size">
+                            <option value="all">ALL</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search">
+                    <button class="filter-button">SEARCH</button>
+                </div>
+            </form>
+            </div>
+            <div class="list-shoes">
+                <script type="text/x-template" class="shoesTemplate">
+                    {{#each shoes}}
+                        <div class="card">
+                            <h3>{{brand}}</h3>
+                            <img class="image-box" src="./img/default.jpg"/>
+                            <div class="details">
+                                <table class="card-details">
+                                    <tr>
+                                        <td>Price: R{{price}}</td>
+                                        <td>In stock: {{in_stock}}</td>
+                                    </tr>
+                                   <tr>
+                                        <td>Size: {{size}}</td>
+                                        <td>Color: {{color}}</td>
+                                   </tr>
+                                </table>
+                            </div>
+                            <button value="{{string this}}" class="add-cart">ADD TO CART</button value={{this}}>
+                        </div>
+                    {{/each}}
+                    {{#unless shoes}}
+                        <h1>No shoes available</h1>
+                    {{/unless}}
+                </script>
+                <div class="shoesData"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/shoeCatalogue.js"></script>
+    <script src="./js/shoeCatalogue.dom.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="./index.html">home</a></li>
+            <li><a href="./new.html">add</a></li>
+            <li><a href="./cart.html">cart</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="heading">
+            <h1>Shoe Catalogue Cart</h1>
+        </div>
+        <div class="table">
+            <table>
+                <script type="text/x-template" class="tableTemplate">
+                {{#if shoes}}
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Color</th>
+                        <th>Size</th>
+                        <th>Quantity</th>
+                        <th>Totals</th>
+                    </tr>
+                </thead>
+                {{#each shoes}}
+                    <tr>
+                        <td>{{brand}}</td>
+                        <td>{{color}}</td>
+                        <td>{{size}}</td>
+                        <td>{{in_stock}}x</td>
+                        <td>R{{price}}</td>
+                    </tr>
+                {{/each}}
+                <tr>
+                    <td colspan="5" style="text-align: right;">Total: R{{totals}}</td>
+                </tr>
+                {{/if}}
+                {{#unless shoes}}
+                    <h2 class="no-cart">Nothing on cart yet...</h2>
+                {{/unless}}
+                </script>
+                <tbody class="tableData"></tbody>
+            </table>
+            <div class="checkout-clear">
+                <button class="checkout-button">CHECKOUT</button>
+                <button class="clear-button">CLEAR</button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/shoeCatalogue.js"></script>
+    <script src="./js/shoeCatalogue.dom.js"></script>
+</body>
+</html>
