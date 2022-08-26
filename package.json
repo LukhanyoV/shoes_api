@@ -1,0 +1,19 @@
+{
+  "name": "shoes_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "pg-promise": "^10.11.1"
+  }
+}
