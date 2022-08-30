@@ -101,7 +101,7 @@
             <script type="text/x-template" class="shoesTemplate">
                 {{#each shoes}}
                 <div class="card col-sm-3" style="width: 18rem; margin: 0.5rem;">
-                    <img src="/img/default.jpg" class="card-img-top" alt="A picture of a {{this.brand}} shoe.">
+                    <img src="/img/{{imageFor this.brand}}" class="card-img-top" alt="A picture of a {{this.brand}} shoe.">
                     <div class="card-body">
                         <h5 class="card-title">{{this.brand}}</h5>
                         <div class="card-body">

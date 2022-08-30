@@ -6,6 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const shoesFunctions = ShoesFunctions()
 
+    Handlebars.registerHelper('imageFor', function (brand) {
+        const brands = {
+            "Mike": "nike.jpg",
+            "Hadidas": "hadidas.jpg",
+            "Abi": "abi.jpg",
+            "Huma": "huma.jpg"
+        }
+        return brands[brand] === undefined ? "default.jpg" : brands[brand]
+    })
+
     // the template
     const shoeTemplate = array => {
 
