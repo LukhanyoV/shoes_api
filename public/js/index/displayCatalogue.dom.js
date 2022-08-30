@@ -52,6 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#brand").innerHTML = brandTemplateHTML
     }
 
+    // display the number of items in cart template
+    const cartTemplate = () => {
+        const items = JSON.parse(localStorage.getItem("cartShoes")) || []
+
+        const counter = [... new Set(items)].length
+
+        const template = document.querySelector(".cartTemplate").innerHTML
+
+        const cartTemplate = Handlebars.compile(template)
+
+        const cartTemplateHTML = cartTemplate({counter})
+
+        document.querySelector(".cartMe").innerHTML = cartTemplateHTML
+    }
+
     filterForm.addEventListener("submit", async (e) => {
         e.preventDefault()
         if(brand.value === "all" && size.value === "all"){
@@ -81,7 +96,23 @@ document.addEventListener("DOMContentLoaded", () => {
         sizeTemplate(sizes)
 
         shoeTemplate(shoes)
+
+        cartTemplate()
+
+        document.querySelectorAll(".add-button").forEach(element => {
+            element.addEventListener("click", () => {
+                addToCart(element.value)
+                cartTemplate()
+            })
+        })
     }
 
     updateDisplay()
 })
+
+// function will save the id of the items to be added to cart
+const addToCart = (item) => {
+    const items = JSON.parse(localStorage.getItem("cartShoes")) || []
+    items.push(item)
+    localStorage.setItem("cartShoes", JSON.stringify(items))
+}
