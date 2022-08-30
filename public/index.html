@@ -7,6 +7,7 @@
     <title>Shoe Catalogue</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -25,38 +26,33 @@
                 <div class="heading">
                     <h1>Filter options</h1>
                 </div>
-            <form>
+            <form class="filter-form">
                 <div class="filters">
-                    <div class="color">
-                        <h3>Color</h3>
-                        <select name="color" id="color">
-                            <option value="all">ALL</option>
-                            <option value="red">red</option>
-                            <option value="blue">blue</option>
-                            <option value="orange">orange</option>
-                        </select>
-                    </div>
                     <div class="brand">
                         <h3>Brand</h3>
                         <select name="brand" id="brand">
-                            <option value="all">ALL</option>
-                            <option value="mike">Mike</option>
-                            <option value="hadidas">Hadidas</option>
-                            <option value="huma">Huma</option>
+                            <script type="text/x-template" class="brandTemplate">
+                                <option value="all">ALL</option>
+                                {{#each brands}}
+                                <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </script>
                         </select>
                     </div>
                     <div class="size">
                         <h3>Size</h3>
                         <select name="brand" id="size">
-                            <option value="all">ALL</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <script type="text/x-template" class="sizeTemplate">
+                                <option value="all">ALL</option>
+                                {{#each sizes}}
+                                <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </script>
                         </select>
                     </div>
                 </div>
                 <div class="search">
-                    <button class="filter-button">SEARCH</button>
+                    <button type="submit" class="filter-button">SEARCH</button>
                 </div>
             </form>
             </div>
@@ -78,7 +74,7 @@
                                    </tr>
                                 </table>
                             </div>
-                            <button value="{{string this}}" class="add-cart">ADD TO CART</button value={{this}}>
+                            <button value="{{id}}" class="add-cart">ADD TO CART</button>
                         </div>
                     {{/each}}
                     {{#unless shoes}}
@@ -89,7 +85,7 @@
             </div>
         </div>
     </div>
-    <script src="./js/shoeCatalogue.js"></script>
-    <script src="./js/shoeCatalogue.dom.js"></script>
+    <script src="./js/shoesService.js"></script>
+    <script src="./js/index/displayCatalogue.dom.js"></script>
 </body>
 </html>
