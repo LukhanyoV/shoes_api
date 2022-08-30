@@ -1,5 +1,7 @@
 const express = require("express")
+const ShoesService = require("./services/shoes-service")
 const ShoesAPI = require("./api/shoes-api")
+const db = require("./db/connection")
 const app = express()
 
 app.use(express.urlencoded({extended: false}))
@@ -7,9 +9,16 @@ app.use(express.json())
 
 app.use(express.static("public"))
 
-const shoesAPI = ShoesAPI()
+const shoesService = ShoesService(db)
+const shoesAPI = ShoesAPI(shoesService)
 
-app.get("/api/test", shoesAPI.test)
+app.get("/api/shoes", shoesAPI.getAll)
+app.get("/api/shoes/brand/:brandname", shoesAPI.getByBrand)
+app.get("/api/shoes/size/:size", shoesAPI.getBySize)
+app.get("/api/shoes/brand/:brandname/size/:size", shoesAPI.getByBrandAndSize)
+
+app.post("/api/shoes/sold/:id", shoesAPI.buyShoe)
+app.post("/api/shoes", shoesAPI.addShoe)
 
 const PORT = process.env.PORT || 5000
 
