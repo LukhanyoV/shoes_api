@@ -21,18 +21,23 @@ const ShoesService = (db) => {
     }
 
     const getByBrand = async (brand) => {
-        const results = db.manyOrNone("SELECT * FROM shoes WHERE brand = $1", [brand])
+        const results = db.manyOrNone("SELECT * FROM shoes WHERE brand = $1 AND in_stock > 0", [brand])
         return results ? results : []
     }
 
     const getBySize = async (size) => {
-        const results = await db.manyOrNone("SELECT * FROM shoes WHERE size = $1", [size])
+        const results = await db.manyOrNone("SELECT * FROM shoes WHERE size = $1 AND in_stock > 0", [size])
         return results ? results : []
     }
 
     const getByBrandAndSize = async (brand, size) => {
-        const results = db.manyOrNone("SELECT * FROM shoes WHERE brand = $1 AND size = $2", [brand, size])
+        const results = db.manyOrNone("SELECT * FROM shoes WHERE brand = $1 AND size = $2 AND in_stock > 0", [brand, size])
         return results ? results : []
+    }
+
+    const getById = async (id) => {
+        const results = db.oneOrNone("SELECT * FROM shoes WHERE id = $1", [id])
+        return results ? results : {}
     }
 
     const buyShoe = async (shoe) => {
@@ -54,7 +59,8 @@ const ShoesService = (db) => {
         getByBrand,
         getBySize,
         getByBrandAndSize,
-        buyShoe
+        buyShoe,
+        getById
     }
 }
 
