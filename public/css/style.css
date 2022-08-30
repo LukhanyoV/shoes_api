@@ -1,69 +1,10 @@
-/* reset */
-* {
-    margin: 0;
-    padding: 0;
-}
-
-/* styling the body */
-body, html {
-    background-color: lightslategray;
-    overflow-x: hidden;
-}
-
-/* adding page navigation */
-.navbar {
-    background-color: black;
-    height: 60px;
-    line-height: 60px;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-.navbar > ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-}
-
-.navbar > ul > li > a {
-    padding: 2em;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-/* hero section */
-.my-form {
-    border: 1px solid black;
-    background-color: #fff;
-    height: max-content;
-}
-
-.row {
-    display: flex;
-    flex-direction: column;
-}
-
 /* the filter section and the container */
 .container {
-    background-image: url("../img/hero.png");
     background-attachment: fixed;
-    object-fit: cover;
-    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
-}
-
-.home-page {
-    display: flex;
-}
-
-.heading {
-    background-color: #fff;
 }
 
 .heading > h1 {
@@ -73,7 +14,7 @@ body, html {
 
 .filters {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     max-width: max-content;
 }
 
@@ -81,7 +22,8 @@ body, html {
     margin: 0em 2em 2em 2em;
 }
 
-#brand, #color, #size {
+
+#brand, #size {
     width: 10em;
 }
 
@@ -107,10 +49,9 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    margin: 1em;
     background-color: lightgray;
     padding: 1em;
+    width: 80%;
 }
 .card > .image-box {
     width: 10em;
@@ -129,19 +70,6 @@ body, html {
     padding: 4px;
 }
 
-/* image box color by class */
-.red {
-    background-color: red;
-}
-
-.blue {
-    background-color: blue;
-}
-
-.orange {
-    background-color: orange;
-}
-
 /* mobile view and smaller screens */
 @media screen and (max-width: 688px) {
     .home-page {
@@ -150,58 +78,11 @@ body, html {
     .filters {
         flex-direction: row;
     }
-    .filters > div {
-        margin: 5px;
-    }
-    .card {
-        width: 82%;
-    }
-    .filters {
-        flex-wrap: wrap;
-    }
-    .list-shoes {
-        width: 400px;
-    }
-    .list-shoes > div {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 400px;
-    }
-    #brand, #color, #size {
+    #brand, #size {
         width: 5em;
     }
 }
 
-@media screen and (max-width: 410px) {
-    .list-shoes {
-        width: 350px;
-    }
-    .list-shoes > div {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 350px;
-    }
-    #brand, #color, #size {
-        width: 5em;
-    }
-}
-
-@media screen and (max-width: 380px) {
-    .list-shoes {
-        width: 300px;
-    }
-    .list-shoes > div {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 300px;
-    }
-    #brand, #color, #size {
-        width: 5em;
-    }
-}
 
 /* cart */
 table {
