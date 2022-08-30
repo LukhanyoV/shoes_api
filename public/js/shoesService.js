@@ -20,7 +20,6 @@ const ShoesFunctions = () => {
     }
 
     const addShoe = async (body) => {
-        console.log(body)
         const {data} = await axios.post(`/api/shoes`, body)
         return data.status
     }
