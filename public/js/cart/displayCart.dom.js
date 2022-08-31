@@ -25,7 +25,7 @@ const cartTable = async () => {
 
     shoes.forEach(shoe => {
         if(shoeIds.includes(shoe.id+"")){
-            let index = shoeIds.indexOf(shoe.id)
+            let index = shoeIds.indexOf(shoe.id+"")
             array.push(shoe)
             shoeIds.splice(index, 1)
         }
