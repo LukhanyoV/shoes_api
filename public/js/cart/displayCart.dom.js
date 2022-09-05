@@ -1,8 +1,8 @@
 const shoesService = ShoesFunctions()
 
 // display the number of items in cart template
-const cartTemplate = () => {
-    const items = JSON.parse(localStorage.getItem("cartShoes")) || []
+const cartTemplate = async () => {
+    const items = await JSON.parse(localStorage.getItem("cartShoes") || "[]")
 
     const counter = [... new Set(items)].length
 
@@ -17,20 +17,20 @@ const cartTemplate = () => {
 
 
 const cartTable = async () => {
-    const shoeIds = JSON.parse(localStorage.getItem("cartShoes")) || []
-    console.log(shoeIds)
+    const shoeIds = await JSON.parse(localStorage.getItem("cartShoes") || "[]").map(Number)
+    // console.log(shoeIds)
     const shoes = await shoesService.getAll()
-    console.log(shoes)
+    // console.log(shoes)
     const array = []
 
     shoes.forEach(shoe => {
-        if(shoeIds.includes(shoe.id+"")){
-            let index = shoeIds.indexOf(shoe.id+"")
+        if(shoeIds.includes(shoe.id)){
+            let index = shoeIds.indexOf(shoe.id)
             array.push(shoe)
             shoeIds.splice(index, 1)
         }
     })
-    console.log(array)
+    // console.log(array)
     // get the total of the items in array
     let total = array.map(obj => obj['price']).reduce((s,v)=>s+v,0)
     
@@ -43,6 +43,49 @@ const cartTable = async () => {
     document.querySelector(".tableData").innerHTML = tableTemplateHTML
 }
 
+document.querySelector(".clear-button").addEventListener("click", () => {
+    // clear iitems on localstorage
+    localStorage.removeItem("cartShoes")
+    // update cart table
+    cartTable()
+    // update items on cart
+    cartTemplate()
+})
+
 cartTable()
 
 cartTemplate()
+
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".remove-item")
+    for (let item of items) {
+        const shoeID = item.value
+        item.addEventListener("click", () => {
+            const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
+            const filtered = shoesID.filter(el => el !== shoeID)
+            // save the filtered shoes without the removed ones
+            localStorage.setItem("cartShoes", JSON.stringify(filtered))
+            // update the cart items and cart table
+            cartTable()
+
+            cartTemplate()
+        })
+    }
+})
+
+document.querySelector(".checkout-button").addEventListener("click", async () => {
+    try {
+        const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
+        for(let item of shoesID){
+            await shoesService.buyShoe(item)
+        }
+        // clear iitems on localstorage
+        localStorage.removeItem("cartShoes")
+        // update cart table
+        cartTable()
+        // update items on cart
+        cartTemplate()
+    } catch (error) {
+        console.log(error.stack)
+    }
+})

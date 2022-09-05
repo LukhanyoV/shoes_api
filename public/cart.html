@@ -48,6 +48,7 @@
                         <th>Size</th>
                         <th>Quantity</th>
                         <th>Totals</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 {{#each shoes}}
@@ -57,6 +58,7 @@
                         <td>{{size}}</td>
                         <td>{{in_stock}}x</td>
                         <td>R{{price}}</td>
+                        <td class="text-center"><span class="remove-item" value="{{id}}">x</span></td>
                     </tr>
                 {{/each}}
                 <tr>
@@ -64,7 +66,7 @@
                 </tr>
                 {{/if}}
                 {{#unless shoes}}
-                    <h2 class="no-cart">Nothing on cart yet...</h2>
+                    <h2 class="no-cart text-dark">Nothing on cart yet...</h2>
                 {{/unless}}
                 </script>
                 <tbody class="tableData"></tbody>

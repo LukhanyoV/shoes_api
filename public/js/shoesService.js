@@ -24,11 +24,17 @@ const ShoesFunctions = () => {
         return data.status
     }
 
+    const buyShoe = async (item) => {
+        const {data} = await axios.post(`/api/shoes/sold/${item}`)
+        return data.status
+    }
+
     return {
         getAll,
         getByBrand,
         getBySize,
         getByBrandAndSize,
-        addShoe
+        addShoe,
+        buyShoe
     }
 }
