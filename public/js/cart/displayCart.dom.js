@@ -44,6 +44,7 @@ const cartTable = async () => {
 }
 
 document.querySelector(".clear-button").addEventListener("click", () => {
+    const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
     // clear iitems on localstorage
     localStorage.removeItem("cartShoes")
     // update cart table
@@ -64,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let item of items) {
         const shoeID = item.value
         item.addEventListener("click", () => {
+            console.log("clicked")
             const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
             const filtered = shoesID.filter(el => el !== shoeID)
             // save the filtered shoes without the removed ones
