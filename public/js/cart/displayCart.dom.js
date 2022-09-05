@@ -50,6 +50,9 @@ document.querySelector(".clear-button").addEventListener("click", () => {
     cartTable()
     // update items on cart
     cartTemplate()
+    // clear cart message
+    let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been cleared!"
+    document.querySelector(".msg").innerHTML = msg
 })
 
 cartTable()
