@@ -41,6 +41,7 @@ const cartTable = async () => {
     const tableTemplateHTML = tableTemplate({shoes: array, totals: total})
 
     document.querySelector(".tableData").innerHTML = tableTemplateHTML
+    handleRemoveClick()
 }
 
 document.querySelector(".clear-button").addEventListener("click", () => {
@@ -61,23 +62,23 @@ cartTable()
 
 cartTemplate()
 
-document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll(".remove-item")
-    for (let item of items) {
-        const shoeID = item.value
-        item.addEventListener("click", () => {
-            console.log("clicked")
-            const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
-            const filtered = shoesID.filter(el => el !== shoeID)
-            // save the filtered shoes without the removed ones
-            localStorage.setItem("cartShoes", JSON.stringify(filtered))
-            // update the cart items and cart table
-            cartTable()
+document.addEventListener("DOMContentLoaded", () => handleRemoveClick)
 
+const handleRemoveClick = () => {
+    document.querySelectorAll(".remove-item").forEach(element => {
+        element.addEventListener("click", () => {
+            removeFromCart(element.value)
             cartTemplate()
+            cartTable()
         })
-    }
-})
+    })
+}
+
+const removeFromCart = (item) => {
+    let items = JSON.parse(localStorage.getItem("cartShoes")) || []
+    items = items.filter(el => el!=item)
+    localStorage.setItem("cartShoes", JSON.stringify(items))
+}
 
 document.querySelector(".checkout-button").addEventListener("click", async () => {
     try {
