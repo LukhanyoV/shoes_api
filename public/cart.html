@@ -39,8 +39,8 @@
         </div>
         <div class="msg text-primary"></div>
         <div>
+            <script type="text/x-template" class="tableTemplate">
             <table class="table table-dark">
-                <script type="text/x-template" class="tableTemplate">
                 {{#if shoes}}
                 <thead>
                     <tr>
@@ -59,7 +59,7 @@
                         <td>{{size}}</td>
                         <td>{{in_stock}}x</td>
                         <td>R{{price}}</td>
-                        <td class="text-center"><span class="remove-item" value="{{id}}">x</span></td>
+                        <td class="text-center"><button class="remove-item" value="{{id}}">x</button></td>
                     </tr>
                 {{/each}}
                 <tr>
@@ -69,9 +69,9 @@
                 {{#unless shoes}}
                     <h2 class="no-cart text-dark">Nothing on cart yet...</h2>
                 {{/unless}}
-                </script>
-                <tbody class="tableData"></tbody>
             </table>
+            </script>
+            <div class="tableData"></div>
             <div class="checkout-clear">
                 <button class="checkout-button">CHECKOUT</button>
                 <button class="clear-button">CLEAR</button>

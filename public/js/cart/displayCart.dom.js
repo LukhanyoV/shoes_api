@@ -54,6 +54,7 @@ document.querySelector(".clear-button").addEventListener("click", () => {
     // clear cart message
     let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been cleared!"
     document.querySelector(".msg").innerHTML = msg
+    clearMsg()
 })
 
 cartTable()
@@ -93,7 +94,12 @@ document.querySelector(".checkout-button").addEventListener("click", async () =>
         // cart checkout success message
         let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been checked out!"
         document.querySelector(".msg").innerHTML = msg
+        clearMsg()
     } catch (error) {
         console.log(error.stack)
     }
 })
+
+const clearMsg = () => {
+    setTimeout(() => document.querySelector(".msg").innerHTML = "", 3000)
+}
