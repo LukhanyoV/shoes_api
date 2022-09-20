@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(addShoeForm)
         const body = {}
         for (const [key, value] of formData) {
-            body[key] = value
+            body[key] = value.trim()
         }
 
         const status = await shoesFunctions.addShoe(body)
