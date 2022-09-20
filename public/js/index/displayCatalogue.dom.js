@@ -101,7 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelectorAll(".add-button").forEach(element => {
             element.addEventListener("click", () => {
-                addToCart(element.value)
+                let shoe = shoes.find(shoe => shoe.id == element.value)
+                let count = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).filter(item => item == element.value).length
+                if(shoe.in_stock > count){
+                    addToCart(element.value)
+                }
                 cartTemplate()
             })
         })

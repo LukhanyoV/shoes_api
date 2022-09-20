@@ -23,14 +23,22 @@ const cartTable = async () => {
     // console.log(shoes)
     const array = []
 
-    shoes.forEach(shoe => {
-        if(shoeIds.includes(shoe.id)){
-            let index = shoeIds.indexOf(shoe.id)
-            array.push(shoe)
-            shoeIds.splice(index, 1)
-        }
+    shoeIds.forEach(id => {
+        if(array.find(shoe => shoe.id === id)) return
+        let shoe = shoes.find(shoe => shoe.id === id)
+        let count = shoeIds.filter(s => s == id).length
+        let price = shoe.price*count
+        shoe = {...shoe, in_cart: count, price: price}
+        array.push(shoe)
     })
-    // console.log(array)
+    console.log(array)
+    // shoes.forEach(shoe => {
+    //     if(shoeIds.includes(shoe.id)){
+    //         let index = shoeIds.indexOf(shoe.id)
+    //         array.push(shoe)
+    //         shoeIds.splice(index, 1)
+    //     }
+    // })
     // get the total of the items in array
     let total = array.map(obj => obj['price']).reduce((s,v)=>s+v,0)
     
@@ -41,7 +49,7 @@ const cartTable = async () => {
     const tableTemplateHTML = tableTemplate({shoes: array, totals: total})
 
     document.querySelector(".tableData").innerHTML = tableTemplateHTML
-    handleRemoveClick()
+    handleButtons()
 }
 
 document.querySelector(".clear-button").addEventListener("click", () => {
@@ -62,9 +70,11 @@ cartTable()
 
 cartTemplate()
 
-document.addEventListener("DOMContentLoaded", () => handleRemoveClick)
+document.addEventListener("DOMContentLoaded", () => handleButtons)
 
-const handleRemoveClick = () => {
+const handleButtons = async () => {
+    const shoes = await shoesService.getAll()
+
     document.querySelectorAll(".remove-item").forEach(element => {
         element.addEventListener("click", () => {
             removeFromCart(element.value)
@@ -72,6 +82,44 @@ const handleRemoveClick = () => {
             cartTable()
         })
     })
+
+    document.querySelectorAll(".inc-item").forEach(element => {
+        element.addEventListener("click", () => {
+            let shoe = shoes.find(shoe => shoe.id == element.value)
+            let count = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).filter(item => item == element.value).length
+            if(shoe.in_stock > count){
+                addToCart(element.value)
+            }
+            cartTemplate()
+            cartTable()
+        })
+    })
+
+    document.querySelectorAll(".dec-item").forEach(element => {
+        element.addEventListener("click", () => {
+            decItem(element.value)
+            cartTemplate()
+            cartTable()
+        })
+    })
+}
+
+const addToCart = (item) => {
+    const items = JSON.parse(localStorage.getItem("cartShoes") || "[]")
+    items.push(item)
+    localStorage.setItem("cartShoes", JSON.stringify(items))
+}
+
+const decItem = (item) => {
+    let items = JSON.parse(localStorage.getItem("cartShoes") || "[]")
+    let count = items.filter(i => i == item).length
+    count--
+    items = items.filter(i => item != i)
+    while(count > 0) {
+        items.push(item)
+        count--
+    }
+    localStorage.setItem("cartShoes", JSON.stringify(items))
 }
 
 const removeFromCart = (item) => {
@@ -87,7 +135,7 @@ document.querySelector(".checkout-button").addEventListener("click", async () =>
             await shoesService.buyShoe(item)
         }
         // clear iitems on localstorage
-        localStorage.removeItem("cartShoes")
+        localStorage.clear()
         // update cart table
         cartTable()
         // update items on cart
