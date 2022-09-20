@@ -1,11 +1,15 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    
     // get the references
     const filterForm = document.querySelector(".filter-form")
     const brand = document.querySelector("#brand")
     const size = document.querySelector("#size")
-
+    
     const shoesFunctions = ShoesFunctions()
-
+    
+    // add shoes to localstorage
+    localStorage.setItem("shoes", JSON.stringify(await shoesFunctions.getAll()))
+    
     Handlebars.registerHelper('imageFor', function (brand) {
         const brands = {
             "Mike": "nike.jpg",
@@ -18,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // the template
     const shoeTemplate = array => {
+        array = array.filter(shoe => shoe.in_stock > 0)
 
         const template = document.querySelector(".shoesTemplate").innerHTML
 
@@ -85,7 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     const updateDisplay = async () => {
-        const shoes = await shoesFunctions.getAll()
+        removeInCart()
+
+        const shoes = JSON.parse(localStorage.getItem("shoes") || "[]")
         
         const brands = [...new Set(shoes.map(shoe => shoe.brand))].sort()
 
@@ -94,19 +101,23 @@ document.addEventListener("DOMContentLoaded", () => {
         brandTemplate(brands)
 
         sizeTemplate(sizes)
-
+        
         shoeTemplate(shoes)
 
         cartTemplate()
 
+
         document.querySelectorAll(".add-button").forEach(element => {
             element.addEventListener("click", () => {
+                const shoes = JSON.parse(localStorage.getItem("shoes") || "[]")
                 let shoe = shoes.find(shoe => shoe.id == element.value)
-                let count = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).filter(item => item == element.value).length
-                if(shoe.in_stock > count){
+                if(shoe.in_stock > 0){
                     addToCart(element.value)
                 }
+                removeInCart()
+                const newShoes = JSON.parse(localStorage.getItem("shoes") || "[]")
                 cartTemplate()
+                shoeTemplate(newShoes)
             })
         })
     }
@@ -119,4 +130,17 @@ const addToCart = (item) => {
     const items = JSON.parse(localStorage.getItem("cartShoes")) || []
     items.push(item)
     localStorage.setItem("cartShoes", JSON.stringify(items))
+}
+
+const removeInCart = () => {
+    const shoes = JSON.parse(localStorage.getItem("shoes") || "[]")
+    const items = JSON.parse(localStorage.getItem("cartShoes") || "[]").map(Number)
+    items.forEach((item) => {
+        shoes.forEach((shoe, index) => {
+            if(shoe.id == item){
+                shoes[index]['in_stock'] > 0 && shoes[index]['in_stock']--
+            }
+        })
+    })
+    localStorage.setItem("shoes", JSON.stringify(shoes))
 }
