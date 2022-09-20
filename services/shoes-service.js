@@ -7,8 +7,8 @@ const ShoesService = (db) => {
 
     const addShoe = async (shoe) => {
         shoe = [
-            shoe.brand,
-            shoe.color,
+            (shoe.brand).toLowerCase().replace(/./, c => c.toUpperCase()),
+            (shoe.color).toLowerCase(),
             shoe.size,
             shoe.price
         ]
