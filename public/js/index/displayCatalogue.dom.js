@@ -114,10 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if(shoe.in_stock > 0){
                     addToCart(element.value)
                 }
-                removeInCart()
-                const newShoes = JSON.parse(localStorage.getItem("shoes") || "[]")
-                cartTemplate()
-                shoeTemplate(newShoes)
+                location.reload()
             })
         })
     }
