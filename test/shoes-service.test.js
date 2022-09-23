@@ -110,7 +110,7 @@ describe("Testing my shoes services API", () => {
         assert.equal(3, shoes.length)
     })
 
-    it("should be able to get all the available shoes in stock by brand name and shoe size", async () => {
+    it("should be able to get all the available shoes in stock by brand name, shoe size ans shoe color", async () => {
         const shoesService = ShoesService(db)
 
         await shoesService.addShoe({
@@ -141,8 +141,8 @@ describe("Testing my shoes services API", () => {
             price: 180
         })
 
-        const shoes = await shoesService.getByBrandAndSize("Mike", 10)
-        assert.equal(2, shoes.length)
+        const shoes = await shoesService.getByAll("Mike", 10, "red")
+        assert.equal(1, shoes.length)
     })
 
     it("should be able to update the stock levels when a shoe is sold", async () => {
