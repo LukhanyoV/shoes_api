@@ -14,8 +14,13 @@ const ShoesFunctions = () => {
         return data.data
     }
 
-    const getByBrandAndSize = async (brand, size) => {
-        const {data} = await axios.get(`/api/shoes/brand/${brand}/size/${size}`)
+    const getByColor = async (color) => {
+        const {data} = await axios.get(`/api/shoes/color/${color}`)
+        return data.data
+    }
+
+    const getByAll = async (brand, size, color) => {
+        const {data} = await axios.get(`/api/shoes/brand/${brand}/size/${size}/color/${color}`)
         return data.data
     }
 
@@ -33,7 +38,8 @@ const ShoesFunctions = () => {
         getAll,
         getByBrand,
         getBySize,
-        getByBrandAndSize,
+        getByColor,
+        getByAll,
         addShoe,
         buyShoe
     }
