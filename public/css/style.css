@@ -171,3 +171,8 @@ th, td {
     padding: 5px;
     border: none;
 }
+
+.add-color {
+    height: 30px;
+    width: 100%;
+}
