@@ -29,6 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
             body[key] = value.trim()
         }
 
+        if(body.price <= 0){
+            msg.innerHTML = "The price must be greater than 0"
+            return
+        } else if(body.size <= 0){
+            msg.innerHTML = "The shoe size must be greater than 0"
+            return
+        }
+
         const status = await shoesFunctions.addShoe(body)
         
         if(status === "success") {
