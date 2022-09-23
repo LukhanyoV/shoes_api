@@ -35,8 +35,8 @@
     opacity:0.9;
 }
 
-#brand, #size {
-    width: 10em;
+#brand, #size, #color {
+    width: 5em;
 }
 
 .filter-button, .add-button {
