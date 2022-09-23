@@ -30,8 +30,13 @@ const ShoesService = (db) => {
         return results ? results : []
     }
 
-    const getByBrandAndSize = async (brand, size) => {
-        const results = db.manyOrNone("SELECT * FROM shoes WHERE brand = $1 AND size = $2 AND in_stock > 0", [brand, size])
+    const getByColor = async (color) => {
+        const results = await db.manyOrNone("SELECT * FROM shoes WHERE color = $1 AND in_stock > 0", [color])
+        return results ? results : []
+    }
+
+    const getByAll = async (brand, size, color) => {
+        const results = db.manyOrNone("SELECT * FROM shoes WHERE brand = $1 AND size = $2 AND color = $3 AND in_stock > 0", [brand, size, color])
         return results ? results : []
     }
 
@@ -58,7 +63,8 @@ const ShoesService = (db) => {
         addShoe,
         getByBrand,
         getBySize,
-        getByBrandAndSize,
+        getByColor,
+        getByAll,
         buyShoe,
         getById
     }

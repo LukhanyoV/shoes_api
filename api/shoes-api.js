@@ -47,10 +47,26 @@ const ShoesAPI = (shoesService) => {
         }
     }
 
-    const getByBrandAndSize = async (req, res) => {
+    const getByColor = async (req, res) => {
         try {
-            const {brandname, size} = req.params
-            const data = await shoesService.getByBrandAndSize(brandname, size)
+            const {color} = req.params
+            const data = await shoesService.getByColor(color)
+            res.json({
+                status: "success",
+                data
+            })
+        } catch (error) {
+            res.json({
+                status: "error",
+                error: error.stack
+            })
+        }
+    }
+
+    const getByAll = async (req, res) => {
+        try {
+            const {brandname, size, color} = req.params
+            const data = await shoesService.getByAll(brandname, size, color)
             res.json({
                 status: "success",
                 data
@@ -97,7 +113,8 @@ const ShoesAPI = (shoesService) => {
         getAll,
         getByBrand,
         getBySize,
-        getByBrandAndSize,
+        getByColor,
+        getByAll,
         buyShoe,
         addShoe
     }
