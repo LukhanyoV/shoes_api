@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const filterForm = document.querySelector(".filter-form")
     const brand = document.querySelector("#brand")
     const size = document.querySelector("#size")
+    const color = document.querySelector("#color")
     
     const shoesFunctions = ShoesFunctions()
     
@@ -57,6 +58,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector("#brand").innerHTML = brandTemplateHTML
     }
 
+    // display the colors available using templates
+    const colorTemplate = array => {
+
+        const template = document.querySelector(".colorTemplate").innerHTML
+
+        const colorTemplate = Handlebars.compile(template)
+
+        const colorTemplateHTML = colorTemplate({colors: array})
+
+        document.querySelector("#color").innerHTML = colorTemplateHTML
+    }
+
     // display the number of items in cart template
     const cartTemplate = () => {
         const items = JSON.parse(localStorage.getItem("cartShoes")) || []
@@ -74,17 +87,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     filterForm.addEventListener("submit", async (e) => {
         e.preventDefault()
-        if(brand.value === "all" && size.value === "all"){
+        if(brand.value === "all" && size.value === "all" && color.value === "all"){
             let array = await shoesFunctions.getAll()
             shoeTemplate(array)
-        } else if(brand.value !== "all" && size.value === "all"){
+        } else if(brand.value !== "all" && size.value === "all" && color.value === "all"){
             let array = await shoesFunctions.getByBrand(brand.value)
             shoeTemplate(array)
-        } else if(brand.value === "all" && size.value !== "all"){
+        } else if(brand.value === "all" && size.value !== "all" && color.value === "all"){
             let array = await shoesFunctions.getBySize(size.value)
             shoeTemplate(array)
-        } else if(brand.value !== "all" && size.value !== "all"){
-            let array = await shoesFunctions.getByBrandAndSize(brand.value, size.value)
+        } else if(brand.value === "all" && size.value === "all" && color.value !== "all"){
+            let array = await shoesFunctions.getByColor(color.value)
+            shoeTemplate(array)
+        } else if(brand.value !== "all" && size.value !== "all" && color.value !== "all"){
+            let array = await shoesFunctions.getByAll(brand.value, size.value, color.value)
             shoeTemplate(array)
         }
     })
@@ -98,9 +114,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const sizes = [...new Set(shoes.map(shoe => shoe.size))].sort((a,b) => a -b)
 
+        const colors = [...new Set(shoes.map(shoe => shoe.color))].sort()
+
         brandTemplate(brands)
 
         sizeTemplate(sizes)
+
+        colorTemplate(colors)
         
         shoeTemplate(shoes)
 

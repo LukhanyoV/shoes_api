@@ -70,6 +70,17 @@
                                     </script>
                                 </select>
                             </div>
+                            <div class="color">
+                                <h5>Color</h5>
+                                <select name="brand" id="color">
+                                    <script type="text/x-template" class="colorTemplate">
+                                        <option value="all">ALL</option>
+                                        {{#each colors}}
+                                        <option value="{{this}}">{{this}}</option>
+                                        {{/each}}
+                                    </script>
+                                </select>
+                            </div>
                         </div>
                         <div class="search">
                             <button type="submit" data-bs-dismiss="modal" class="filter-button">SEARCH</button>
