@@ -1,3 +1,8 @@
+/*
+global ShoesFunctions,
+Handlebars
+*/
+
 document.addEventListener("DOMContentLoaded", async () => {
     
     // get the references

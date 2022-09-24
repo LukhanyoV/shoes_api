@@ -1,3 +1,6 @@
+/*
+ global process, describe, beforeEach, it, after
+*/
 const assert = require("assert")
 const ShoesService = require("../services/shoes-service")
 

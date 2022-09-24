@@ -1,3 +1,8 @@
+/*
+global ShoesFunctions,
+Handlebars
+*/
+
 const shoesService = ShoesFunctions()
 
 // display the number of items in cart template

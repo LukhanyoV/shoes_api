@@ -1,3 +1,6 @@
+/*
+global process
+*/
 const express = require("express")
 const ShoesService = require("./services/shoes-service")
 const ShoesAPI = require("./api/shoes-api")

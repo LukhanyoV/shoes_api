@@ -1,3 +1,8 @@
+/*
+global axios
+*/
+
+// eslint-disable-next-line no-unused-vars
 const ShoesFunctions = () => {
     const getAll = async () => {
         const {data} = await axios.get(`/api/shoes`)

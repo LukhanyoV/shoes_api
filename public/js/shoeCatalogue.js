@@ -1,4 +1,5 @@
 // factory function for my shoe catalogue site
+// eslint-disable-next-line no-unused-vars
 const ShoeCatalogue = () => {
     const myShoes = [
         {

@@ -1,3 +1,8 @@
+/*
+global ShoesFunctions,
+Handlebars
+*/
+
 document.addEventListener("DOMContentLoaded", () => {
     // get the references
     const addShoeForm = document.querySelector(".add-shoe-form")
