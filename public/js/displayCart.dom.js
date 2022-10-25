@@ -36,15 +36,7 @@ const cartTable = async () => {
         shoe = {...shoe, in_cart: count, price: price}
         array.push(shoe)
     })
-    console.log(array)
-    // shoes.forEach(shoe => {
-    //     if(shoeIds.includes(shoe.id)){
-    //         let index = shoeIds.indexOf(shoe.id)
-    //         array.push(shoe)
-    //         shoeIds.splice(index, 1)
-    //     }
-    // })
-    // get the total of the items in array
+
     let total = array.map(obj => obj['price']).reduce((s,v)=>s+v,0)
     
     const template = document.querySelector(".tableTemplate").innerHTML
@@ -56,20 +48,6 @@ const cartTable = async () => {
     document.querySelector(".tableData").innerHTML = tableTemplateHTML
     handleButtons()
 }
-
-document.querySelector(".clear-button").addEventListener("click", () => {
-    const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
-    // clear iitems on localstorage
-    localStorage.removeItem("cartShoes")
-    // update cart table
-    cartTable()
-    // update items on cart
-    cartTemplate()
-    // clear cart message
-    let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been cleared!"
-    document.querySelector(".msg").innerHTML = msg
-    clearMsg()
-})
 
 cartTable()
 
@@ -107,6 +85,48 @@ const handleButtons = async () => {
             cartTable()
         })
     })
+
+    if(document.querySelector(".clear-button")){
+
+        document.querySelector(".clear-button").addEventListener("click", () => {
+            const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
+            // clear iitems on localstorage
+            localStorage.removeItem("cartShoes")
+            // update cart table
+            cartTable()
+            // update items on cart
+            cartTemplate()
+            // clear cart message
+            let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been cleared!"
+            document.querySelector(".msg").innerHTML = msg
+            clearMsg()
+        })
+    
+    }
+
+    if(document.querySelector(".checkout-button")){
+
+        document.querySelector(".checkout-button").addEventListener("click", async () => {
+            try {
+                const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
+                for(let item of shoesID){
+                    await shoesService.buyShoe(item)
+                }
+                // clear iitems on localstorage
+                localStorage.clear()
+                // update cart table
+                cartTable()
+                // update items on cart
+                cartTemplate()
+                // cart checkout success message
+                let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been checked out!"
+                document.querySelector(".msg").innerHTML = msg
+                clearMsg()
+            } catch (error) {
+                console.log(error.stack)
+            }
+        })
+    }
 }
 
 const addToCart = (item) => {
@@ -132,27 +152,6 @@ const removeFromCart = (item) => {
     items = items.filter(el => el!=item)
     localStorage.setItem("cartShoes", JSON.stringify(items))
 }
-
-document.querySelector(".checkout-button").addEventListener("click", async () => {
-    try {
-        const shoesID = (JSON.parse(localStorage.getItem("cartShoes") || "[]")).map(Number)
-        for(let item of shoesID){
-            await shoesService.buyShoe(item)
-        }
-        // clear iitems on localstorage
-        localStorage.clear()
-        // update cart table
-        cartTable()
-        // update items on cart
-        cartTemplate()
-        // cart checkout success message
-        let msg = shoesID.length === 0 ? "No items on cart!" : "Items have been checked out!"
-        document.querySelector(".msg").innerHTML = msg
-        clearMsg()
-    } catch (error) {
-        console.log(error.stack)
-    }
-})
 
 const clearMsg = () => {
     setTimeout(() => document.querySelector(".msg").innerHTML = "", 3000)

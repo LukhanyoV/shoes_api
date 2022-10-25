@@ -48,8 +48,8 @@
                         <th>Color</th>
                         <th>Size</th>
                         <th>Quantity</th>
-                        <th>Totals</th>
                         <th>Remove</th>
+                        <th>Totals</th>
                     </tr>
                 </thead>
                 {{#each shoes}}
@@ -58,27 +58,29 @@
                         <td>{{color}}</td>
                         <td>{{size}}</td>
                         <td><button class="btn btn-primary btn-sm inc-item" value="{{id}}">+</button><span class="border-me">{{in_cart}}</span><button class="btn btn-primary btn-sm dec-item" value="{{id}}">-</button> </td>
+                        <td class="text-center"><button class="btn btn-danger remove-item" value="{{id}}"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                         <td>R{{price}}</td>
-                        <td class="text-center"><button class="btn btn-danger remove-item" value="{{id}}">x</button></td>
                     </tr>
                 {{/each}}
                 <tr>
-                    <td colspan="5" style="text-align: right;">Total: R{{totals}}</td>
+                    <td colspan="6" style="text-align: right;">Total: R{{totals}}</td>
                 </tr>
                 {{/if}}
                 {{#unless shoes}}
                     <h2 class="no-cart text-dark">Nothing on cart yet...</h2>
                 {{/unless}}
             </table>
+            {{#if shoes}}
+            <div class="checkout-clear">
+                <button class="btn btn-primary checkout-button">CHECKOUT</button>
+                <button class="btn btn-primary clear-button">CLEAR</button>
+            </div>
+            {{/if}}
             </script>
             <div class="tableData"></div>
-            <div class="checkout-clear">
-                <button class="checkout-button">CHECKOUT</button>
-                <button class="clear-button">CLEAR</button>
-            </div>
         </div>
     </div>
     <script src="./js/shoesService.js"></script>
-    <script src="./js/cart/displayCart.dom.js"></script>
+    <script src="./js/displayCart.dom.js"></script>
 </body>
 </html>

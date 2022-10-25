@@ -1,143 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shoe Catalogue</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/x-template" class="cartTemplate">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoe Catalogue</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/x-template" class="cartTemplate">
+    <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link" href="/new.html">Add</a>
         <a class="nav-link" href="/cart.html">
             Cart<i class="fa badge" value={{counter}}>&#xf07a;</i>
         </a>
     </script>
 </head>
-<body>
-    <!-- start the navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Shoe Catalogue</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav sm:bg-dark cartMe"></div>
-            </div>
-        </div>
-    </nav> <!-- end of the navigation bar -->
 
-    <!-- start of the filter modal -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-        
-                <!-- Modal Header -->
-                <div class="modal-header">
-                <h4 class="modal-title">Filter options</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-        
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form class="filter-form">
-                        <div class="filters">
-                            <div class="brand">
-                                <h5>Brand</h5>
-                                <select name="brand" id="brand">
-                                    <script type="text/x-template" class="brandTemplate">
-                                        <option value="all">ALL</option>
+<body>
+  <!-- start the navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Shoe Catalogue</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav sm:bg-dark cartMe"></div>
+      </div>
+    </div>
+  </nav> <!-- end of the navigation bar -->
+
+  <!-- start of the filter modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Filter options</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form class="filter-form">
+            <div class="filters">
+              <div class="brand">
+                <h5>Brand</h5>
+                <select name="brand" id="brand">
+                  <script type="text/x-template" class="brandTemplate">
+                    <option value="all">ALL</option>
                                         {{#each brands}}
                                         <option value="{{this}}">{{this}}</option>
                                         {{/each}}
                                     </script>
-                                </select>
-                            </div>
-                            <div class="size">
-                                <h5>Size</h5>
-                                <select name="brand" id="size">
-                                    <script type="text/x-template" class="sizeTemplate">
-                                        <option value="all">ALL</option>
+                </select>
+              </div>
+              <div class="size">
+                <h5>Size</h5>
+                <select name="brand" id="size">
+                  <script type="text/x-template" class="sizeTemplate">
+                    <option value="all">ALL</option>
                                         {{#each sizes}}
                                         <option value="{{this}}">{{this}}</option>
                                         {{/each}}
                                     </script>
-                                </select>
-                            </div>
-                            <div class="color">
-                                <h5>Color</h5>
-                                <select name="brand" id="color">
-                                    <script type="text/x-template" class="colorTemplate">
-                                        <option value="all">ALL</option>
+                </select>
+              </div>
+              <div class="color">
+                <h5>Color</h5>
+                <select name="brand" id="color">
+                  <script type="text/x-template" class="colorTemplate">
+                    <option value="all">ALL</option>
                                         {{#each colors}}
                                         <option value="{{this}}">{{this}}</option>
                                         {{/each}}
                                     </script>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="search">
-                            <button type="submit" data-bs-dismiss="modal" class="filter-button">SEARCH</button>
-                        </div>
-                    </form>
-                </div>
-        
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
+                </select>
+              </div>
             </div>
+            <div class="search">
+              <button type="submit" data-bs-dismiss="modal" class="btn btn-primary filter-button">SEARCH</button>
+            </div>
+          </form>
         </div>
-    </div> <!-- end of the filter modal -->
 
-    <!-- start of the main container -->
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="heading">
-                    <h1>Shoe Catalogue</h1>
-                </div>
-            </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                    Open filter
-                </button>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center">
-            <script type="text/x-template" class="shoesTemplate">
-                {{#each shoes}}
-                <div class="card col-sm-3" style="width: 18rem; margin: 0.5rem;">
-                    <img src="/img/{{imageFor this.brand}}" class="card-img-top" alt="A picture of a {{this.brand}} shoe.">
-                    <div class="card-body">
-                        <h5 class="card-title">Brand: {{this.brand}}</h5>
-                        <div class="card-body">
-                            <span class="fw-bold">Color: </span>{{this.color}},
-                            <span class="fw-bold">Size: </span>{{this.size}}
-                            <br>
-                            <span class="fw-bold">In stock: </span>{{this.in_stock}},
-                            <span class="fw-bold">Price: </span>R{{this.price}}
-                        </div>
-                        <button class="btn btn-primary add-button" value="{{this.id}}">add to cart</button>
+      </div>
+    </div>
+  </div> <!-- end of the filter modal -->
+
+  <!-- start of the main container -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+          <h1>Shoe Catalogue</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary filter-button" data-bs-toggle="modal" data-bs-target="#myModal">
+          Open filter
+        </button>
+      </div>
+    </div>
+    <script type="text/x-template" class="shoesTemplate">
+      {{#each shoes}}
+        <div class="card col-sm-3">
+          <div class="card-head">
+            <h4>{{this.brand}}</h4>
+          </div>
+          <img src="/img/{{imageFor this.brand}}" class="card-img-top" alt="...">
+          <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <span class="fw-bold">Size: </span>{{this.size}}
+                    </div>
+                    <div class="col-7">
+                        <span class="fw-bold">Color: </span>{{this.color}}
                     </div>
                 </div>
-                {{/each}}
-                {{#unless shoes}}
-                    <h1>No shoes available</h1>
-                {{/unless}}
-            </script>
-            <div class="row d-flex justify-content-center shoesData"></div>
+                <div class="row">
+                    <div class="col-6">
+                        <span class="fw-bold">In stock: </span>{{this.in_stock}}
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-primary add-button" value="{{this.id}}">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span>CART</span>
+                          </button>
+                    </div>
+                    <div class="col">
+                        <span class="fw-bold">Price: </span>R{{this.price}}
+                    </div>
+                </div>
+            <!-- <div class="row">
+              <div class="col-6">
+                <div class="col-12">
+                  
+                </div>
+                <div class="col-12">
+                  
+                </div>
+              </div>
+              <div class="col">
+                
+                <div class="col-12">
+                    
+                  </div>
+              </div>
+            </div> -->
+          </div>
         </div>
-    </div>
-    <script src="./js/shoesService.js"></script>
-    <script src="./js/index/displayCatalogue.dom.js"></script>
+      {{/each}}
+      {{#unless shoes}}
+        <h1>No shoes available</h1>
+      {{/unless}}
+    </script>
+    <div class="row d-flex justify-content-center shoesData"></div>
+  </div>
+  <script src="./js/shoesService.js"></script>
+  <script src="./js/index.js"></script>
 </body>
+
 </html>

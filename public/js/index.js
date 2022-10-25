@@ -4,7 +4,6 @@ Handlebars
 */
 
 document.addEventListener("DOMContentLoaded", async () => {
-    
     // get the references
     const filterForm = document.querySelector(".filter-form")
     const brand = document.querySelector("#brand")
